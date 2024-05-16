@@ -17,6 +17,18 @@ const CurrencyConvertor = () => {
             placeholder="0"
           ></input>
         </div>
+        <div className="mt-6">
+          <select
+            id="currency-1"
+            className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
+          ></select>
+          <input
+            type="number"
+            id="number-input"
+            className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
+            placeholder="0"
+          ></input>
+        </div>
       </div>
     </div>
   );
