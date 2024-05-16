@@ -1,8 +1,8 @@
 const CurrencyConvertor = () => {
   return (
-    <div className="container max-w-auto flex justify-center pt-6">
+    <div className="w-full flex justify-center">
       <div>
-        <h1 className="text-center font-mono text-xl text-gray-900">
+        <h1 className="text-center mt-6 text-cyan-700 font-serif">
           Currency Convertor
         </h1>
       </div>
