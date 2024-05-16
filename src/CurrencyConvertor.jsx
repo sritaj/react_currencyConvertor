@@ -6,7 +6,10 @@ const CurrencyConvertor = () => {
           Currency Convertor
         </h1>
         <div className="mt-6">
-          <select></select>
+          <select
+            id="currency-1"
+            className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
+          ></select>
           <input
             type="number"
             id="number-input"
