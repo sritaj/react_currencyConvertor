@@ -22,7 +22,8 @@ const CurrencyConvertor = () => {
             id="from-amount"
             className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
             placeholder="0"
-          ></input>
+            value={fromAmount}
+          />
         </div>
         <div className="mt-6">
           <select
@@ -34,7 +35,8 @@ const CurrencyConvertor = () => {
             id="to-amount"
             className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
             placeholder="0"
-          ></input>
+            value={toAmount}
+          />
         </div>
         <div className="mt-6 flex justify-center">
           <button
