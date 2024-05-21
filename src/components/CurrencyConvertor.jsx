@@ -27,6 +27,13 @@ const CurrencyConvertor = () => {
     console.log(data);
   }, []);
 
+  const showConvertedCurrency = () => {
+    const convertedCurrency =
+      fromAmount *
+      (currencies[toCurrencyDropdown] / currencies[fromCurrencyDropdown]);
+    setToAmount(convertedCurrency);
+  };
+
   return (
     <div className="w-full flex justify-center">
       <div>
@@ -53,6 +60,7 @@ const CurrencyConvertor = () => {
             className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
             placeholder="0"
             value={fromAmount}
+            onChange={(e) => setFromAmount(e.target.value)}
           />
         </div>
         <div className="mt-6">
@@ -74,12 +82,14 @@ const CurrencyConvertor = () => {
             className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
             placeholder="0"
             value={toAmount}
+            readOnly={true}
           />
         </div>
         <div className="mt-6 flex justify-center">
           <button
             id="convert"
             className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
+            onClick={showConvertedCurrency}
           >
             Convert
           </button>
