@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
   const [toAmount, setToAmount] = useState(0);
   const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
   const [toCurrencyDropdown, setToCurrencyDropdown] = useState("DOLLAR");
+
+  useEffect(() => {
+    const data = axios
+      .get(
+        "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
+      )
+      .then((response) => setFromCurrencyDropdown());
+    console.log(data);
+  }, [fromCurrencyDropdown, toCurrencyDropdown]);
 
   return (
     <div className="w-full flex justify-center">
