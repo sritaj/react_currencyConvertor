@@ -4,15 +4,22 @@ import axios from "axios";
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
   const [toAmount, setToAmount] = useState(0);
-  const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
-  const [toCurrencyDropdown, setToCurrencyDropdown] = useState("DOLLAR");
+
+  const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState(["INR"]);
+  const [toCurrencyDropdown, setToCurrencyDropdown] = useState("USD");
+
+  const [currencies, setCurrencies] = useState([]);
+  const [exchangeRate, setExchangeRates] = useState([]);
 
   useEffect(() => {
     const data = axios
       .get(
         "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
       )
-      .then((response) => setFromCurrencyDropdown());
+      .then((response) => {
+        setCurrencies(response.data),
+          setFromCurrencyDropdown(response.data[18]);
+      });
     console.log(data);
   }, [fromCurrencyDropdown, toCurrencyDropdown]);
 
@@ -26,6 +33,8 @@ const CurrencyConvertor = () => {
           <select
             id="from-currency"
             className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
+            defaultValue={fromCurrencyDropdown}
+            onChange={(e) => setFromCurrencyDropdown(e.target.value)}
           ></select>
           <input
             type="number"
