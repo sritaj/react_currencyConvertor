@@ -5,11 +5,12 @@ const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
   const [toAmount, setToAmount] = useState(0);
 
-  const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState(["INR"]);
+  // Utilizing states to set the default value
+  const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
   const [toCurrencyDropdown, setToCurrencyDropdown] = useState("USD");
 
-  const [currencies, setCurrencies] = useState([]);
-  const [exchangeRate, setExchangeRates] = useState([]);
+  // Utilizing state to set the currencies and exchange rates from the API call
+  const [currencies, setCurrencies] = useState({});
 
   useEffect(() => {
     const data = axios
@@ -17,11 +18,14 @@ const CurrencyConvertor = () => {
         "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
       )
       .then((response) => {
-        setCurrencies(response.data),
-          setFromCurrencyDropdown(response.data[18]);
+        setCurrencies(response.data.data);
+        //console.log(response.data.data);
+
+        //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
+        // console.log(`Test: ${Object.keys(response.data.data)[15]}`); Prints INR
       });
     console.log(data);
-  }, [fromCurrencyDropdown, toCurrencyDropdown]);
+  }, []);
 
   return (
     <div className="w-full flex justify-center">
@@ -33,9 +37,16 @@ const CurrencyConvertor = () => {
           <select
             id="from-currency"
             className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
-            defaultValue={fromCurrencyDropdown}
+            value={fromCurrencyDropdown}
             onChange={(e) => setFromCurrencyDropdown(e.target.value)}
-          ></select>
+          >
+            {Object.entries(currencies).map(([name, exchange]) => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+
           <input
             type="number"
             id="from-amount"
@@ -48,7 +59,15 @@ const CurrencyConvertor = () => {
           <select
             id="to-currency"
             className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
-          ></select>
+            value={toCurrencyDropdown}
+            onChange={(e) => setToCurrencyDropdown(e.target.value)}
+          >
+            {Object.entries(currencies).map(([name, exchange]) => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
           <input
             type="number"
             id="to-amount"
