@@ -130,7 +130,7 @@ const CurrencyConvertor = () => {
             </button> */}
             <button
               id="convert"
-              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
+              className="text-white bg-blue-600 hover:bg-blue-800 rounded-full px-5 py-1 ring-offset-1 ring-1"
               onClick={resetValues}
             >
               Reset
