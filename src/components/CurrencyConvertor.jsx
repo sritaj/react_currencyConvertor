@@ -39,13 +39,13 @@ const CurrencyConvertor = () => {
       <div className="max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-b from-yellow-300 to-blue-400">
         <a>
           <img
-            className="rounded-t-lg"
+            className="rounded-lg"
             src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
           />
         </a>
         <div>
-          <h1 className="text-center mt-6 text-cyan-700 font-serif">
+          <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
             Currency Convertor
           </h1>
           <div className="mt-6">
