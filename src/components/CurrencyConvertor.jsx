@@ -23,6 +23,9 @@ const CurrencyConvertor = () => {
 
         //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
         // console.log(`Test: ${Object.keys(response.data.data)[15]}`); Prints INR
+      })
+      .catch((error) => {
+        console.error("Error fetching details from the API", error);
       });
     console.log(data);
   }, []);
@@ -31,7 +34,7 @@ const CurrencyConvertor = () => {
     const convertedCurrency =
       fromAmount *
       (currencies[toCurrencyDropdown] / currencies[fromCurrencyDropdown]);
-    setToAmount(convertedCurrency);
+    setToAmount(convertedCurrency.toFixed(2));
   };
 
   return (
@@ -72,6 +75,7 @@ const CurrencyConvertor = () => {
                 onChange={(e) => setFromAmount(e.target.value)}
               />
             </div>
+            <hr className="w-50 h-1 mx-auto g-gray-100" />
             <div className="mt-6">
               <select
                 id="to-currency"
