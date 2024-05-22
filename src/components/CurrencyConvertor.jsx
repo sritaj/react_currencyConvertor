@@ -35,64 +35,73 @@ const CurrencyConvertor = () => {
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div>
-        <h1 className="text-center mt-6 text-cyan-700 font-serif">
-          Currency Convertor
-        </h1>
-        <div className="mt-6">
-          <select
-            id="from-currency"
-            className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
-            value={fromCurrencyDropdown}
-            onChange={(e) => setFromCurrencyDropdown(e.target.value)}
-          >
-            {Object.entries(currencies).map(([name, exchange]) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
+    <div className="flex justify-center py-14">
+      <div className="max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-b from-yellow-300 to-blue-400">
+        <a>
+          <img
+            className="rounded-t-lg"
+            src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt=""
+          />
+        </a>
+        <div>
+          <h1 className="text-center mt-6 text-cyan-700 font-serif">
+            Currency Convertor
+          </h1>
+          <div className="mt-6">
+            <select
+              id="from-currency"
+              className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
+              value={fromCurrencyDropdown}
+              onChange={(e) => setFromCurrencyDropdown(e.target.value)}
+            >
+              {Object.entries(currencies).map(([name, exchange]) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
 
-          <input
-            type="number"
-            id="from-amount"
-            className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
-            placeholder="0"
-            value={fromAmount}
-            onChange={(e) => setFromAmount(e.target.value)}
-          />
-        </div>
-        <div className="mt-6">
-          <select
-            id="to-currency"
-            className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
-            value={toCurrencyDropdown}
-            onChange={(e) => setToCurrencyDropdown(e.target.value)}
-          >
-            {Object.entries(currencies).map(([name, exchange]) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            id="to-amount"
-            className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
-            placeholder="0"
-            value={toAmount}
-            readOnly={true}
-          />
-        </div>
-        <div className="mt-6 flex justify-center">
-          <button
-            id="convert"
-            className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
-            onClick={showConvertedCurrency}
-          >
-            Convert
-          </button>
+            <input
+              type="number"
+              id="from-amount"
+              className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
+              placeholder="0"
+              value={fromAmount}
+              onChange={(e) => setFromAmount(e.target.value)}
+            />
+          </div>
+          <div className="mt-6">
+            <select
+              id="to-currency"
+              className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
+              value={toCurrencyDropdown}
+              onChange={(e) => setToCurrencyDropdown(e.target.value)}
+            >
+              {Object.entries(currencies).map(([name, exchange]) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <input
+              type="number"
+              id="to-amount"
+              className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
+              placeholder="0"
+              value={toAmount}
+              readOnly={true}
+            />
+          </div>
+          <div className="mt-6 flex justify-center">
+            <button
+              id="convert"
+              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
+              onClick={showConvertedCurrency}
+            >
+              Convert
+            </button>
+          </div>
         </div>
       </div>
     </div>
