@@ -49,8 +49,8 @@ const CurrencyConvertor = () => {
   };
 
   return (
-    <div className=" flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
-      <div className=" max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-r from-slate-100 to-slate-200">
+    <div className="min-h-screen flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
+      <div className=" max-w-md bg-white border border-gray-200 rounded-lg shadow p-12 py-12 bg-gradient-to-r from-slate-100 to-slate-200">
         <a>
           <img
             className="rounded-lg"
@@ -86,7 +86,9 @@ const CurrencyConvertor = () => {
               />
             </div>
 
-            <div className="mt-6">
+            <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
+
+            <div className="">
               <select
                 id="to-currency"
                 className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
