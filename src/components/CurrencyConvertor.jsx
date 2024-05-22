@@ -85,7 +85,7 @@ const CurrencyConvertor = () => {
                 onChange={(e) => setFromAmount(e.target.value)}
               />
             </div>
-            <hr className="w-50 h-1 mx-auto g-gray-100" />
+
             <div className="mt-6">
               <select
                 id="to-currency"
