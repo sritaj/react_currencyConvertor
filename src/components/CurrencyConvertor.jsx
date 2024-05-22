@@ -85,7 +85,25 @@ const CurrencyConvertor = () => {
               </select>
             </div>
 
-            <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
+            <div className="relative inline-flex items-center justify-center w-full">
+              <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
+              <div className="absolute px-4 -translate-x-1/2  left-1/2">
+                <button className="text-white bg-orange-500 hover:bg-orange-700 rounded-full px-2 py-1 ring-offset-1 ring-1 ring-orange-500 ring-offset-orange-400 align-middle">
+                  <svg
+                    className="w-6 h-6 mr-0 fill-current stroke-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M8 7l4-4 4 4M12 3v18" />
+
+                    <path d="M16 17l-4 4-4-4M12 21V3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
 
             <div className="">
               <input
