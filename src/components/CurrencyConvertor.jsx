@@ -104,6 +104,10 @@ const CurrencyConvertor = () => {
               Convert
             </button>
           </div>
+          <p className="mt-6 text-center text-nowrap font-extralight">
+            {fromCurrencyDropdown} : {fromAmount} equals to {toCurrencyDropdown}{" "}
+            : {toAmount}
+          </p>
         </div>
       </div>
     </div>
