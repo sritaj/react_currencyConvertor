@@ -48,6 +48,13 @@ const CurrencyConvertor = () => {
     setToCurrencyDropdown("USD");
   };
 
+  const swapFields = () => {
+    setToAmount(fromAmount);
+    setFromAmount(toAmount);
+    setToCurrencyDropdown(fromCurrencyDropdown);
+    setFromCurrencyDropdown(toCurrencyDropdown);
+  };
+
   return (
     <div className="min-h-screen flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
       <div className=" max-w-md bg-white border border-gray-200 rounded-lg shadow p-12 py-12 bg-gradient-to-r from-slate-100 to-slate-200">
@@ -88,7 +95,10 @@ const CurrencyConvertor = () => {
             <div className="relative inline-flex items-center justify-center w-full">
               <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
               <div className="absolute px-4 -translate-x-1/2  left-1/2">
-                <button className="text-white bg-orange-500 hover:bg-orange-700 rounded-full px-2 py-1 ring-offset-1 ring-1 ring-orange-500 ring-offset-orange-400 align-middle">
+                <button
+                  className="text-white bg-orange-500 hover:bg-orange-700 rounded-full px-2 py-1 ring-offset-1 ring-1 ring-orange-500 ring-offset-orange-400 align-middle"
+                  onClick={swapFields}
+                >
                   <svg
                     className="w-6 h-6 mr-0 fill-current stroke-current"
                     xmlns="http://www.w3.org/2000/svg"
