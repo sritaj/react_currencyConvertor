@@ -64,9 +64,16 @@ const CurrencyConvertor = () => {
           </h1>
           <div className="flex flex-col items-center">
             <div>
+              <input
+                type="number"
+                id="from-amount"
+                className="ps-3 h-8 rounded-l-lg border-2 border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
+                value={fromAmount}
+                onChange={(e) => setFromAmount(e.target.value)}
+              />
               <select
                 id="from-currency"
-                className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
+                className="ps-3 rounded-r-lg h-8 border-2 border-l-0  border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
                 value={fromCurrencyDropdown}
                 onChange={(e) => setFromCurrencyDropdown(e.target.value)}
               >
@@ -76,22 +83,21 @@ const CurrencyConvertor = () => {
                   </option>
                 ))}
               </select>
-
-              <input
-                type="number"
-                id="from-amount"
-                className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
-                value={fromAmount}
-                onChange={(e) => setFromAmount(e.target.value)}
-              />
             </div>
 
             <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
 
             <div className="">
+              <input
+                type="number"
+                id="to-amount"
+                className="ps-3 h-8 rounded-l-lg border-2 border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
+                value={toAmount}
+                readOnly={true}
+              />
               <select
                 id="to-currency"
-                className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
+                className="ps-3 rounded-r-lg h-8 border-2 border-l-0  border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
                 value={toCurrencyDropdown}
                 onChange={(e) => setToCurrencyDropdown(e.target.value)}
               >
@@ -101,13 +107,6 @@ const CurrencyConvertor = () => {
                   </option>
                 ))}
               </select>
-              <input
-                type="number"
-                id="to-amount"
-                className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
-                value={toAmount}
-                readOnly={true}
-              />
             </div>
           </div>
 
