@@ -41,6 +41,13 @@ const CurrencyConvertor = () => {
     setToAmount(convertedCurrency.toFixed(2));
   };
 
+  const resetValues = () => {
+    setFromAmount(0);
+    setToAmount(0);
+    setFromCurrencyDropdown("INR");
+    setToCurrencyDropdown("USD");
+  };
+
   return (
     <div className=" flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
       <div className=" max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-r from-slate-100 to-slate-200">
@@ -101,19 +108,26 @@ const CurrencyConvertor = () => {
               />
             </div>
           </div>
+          <p className="mt-6 text-center text-nowrap font-extralight">
+            {fromCurrencyDropdown} : {fromAmount} equals to {toCurrencyDropdown}{" "}
+            : {toAmount}
+          </p>
           <div className="mt-6 flex justify-center">
-            <button
+            {/* <button
               id="convert"
               className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
               onClick={showConvertedCurrency}
             >
               Convert
+            </button> */}
+            <button
+              id="convert"
+              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
+              onClick={resetValues}
+            >
+              Reset
             </button>
           </div>
-          <p className="mt-6 text-center text-nowrap font-extralight">
-            {fromCurrencyDropdown} : {fromAmount} equals to {toCurrencyDropdown}{" "}
-            : {toAmount}
-          </p>
         </div>
       </div>
     </div>
