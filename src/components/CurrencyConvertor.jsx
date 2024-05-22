@@ -35,8 +35,8 @@ const CurrencyConvertor = () => {
   };
 
   return (
-    <div className="flex justify-center py-14">
-      <div className="max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-b from-yellow-300 to-blue-400">
+    <div className=" flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
+      <div className=" max-w-screen-sm bg-white border border-gray-200 rounded-lg shadow p-40 py-20 bg-gradient-to-r from-slate-100 to-slate-200">
         <a>
           <img
             className="rounded-lg"
@@ -48,50 +48,52 @@ const CurrencyConvertor = () => {
           <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
             Currency Convertor
           </h1>
-          <div className="mt-6">
-            <select
-              id="from-currency"
-              className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
-              value={fromCurrencyDropdown}
-              onChange={(e) => setFromCurrencyDropdown(e.target.value)}
-            >
-              {Object.entries(currencies).map(([name, exchange]) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
+          <div className="">
+            <div className="">
+              <select
+                id="from-currency"
+                className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
+                value={fromCurrencyDropdown}
+                onChange={(e) => setFromCurrencyDropdown(e.target.value)}
+              >
+                {Object.entries(currencies).map(([name, exchange]) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
 
-            <input
-              type="number"
-              id="from-amount"
-              className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
-              placeholder="0"
-              value={fromAmount}
-              onChange={(e) => setFromAmount(e.target.value)}
-            />
-          </div>
-          <div className="mt-6">
-            <select
-              id="to-currency"
-              className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
-              value={toCurrencyDropdown}
-              onChange={(e) => setToCurrencyDropdown(e.target.value)}
-            >
-              {Object.entries(currencies).map(([name, exchange]) => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            <input
-              type="number"
-              id="to-amount"
-              className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
-              placeholder="0"
-              value={toAmount}
-              readOnly={true}
-            />
+              <input
+                type="number"
+                id="from-amount"
+                className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
+                placeholder="0"
+                value={fromAmount}
+                onChange={(e) => setFromAmount(e.target.value)}
+              />
+            </div>
+            <div className="mt-6">
+              <select
+                id="to-currency"
+                className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded w-16"
+                value={toCurrencyDropdown}
+                onChange={(e) => setToCurrencyDropdown(e.target.value)}
+              >
+                {Object.entries(currencies).map(([name, exchange]) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="number"
+                id="to-amount"
+                className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
+                placeholder="0"
+                value={toAmount}
+                readOnly={true}
+              />
+            </div>
           </div>
           <div className="mt-6 flex justify-center">
             <button
