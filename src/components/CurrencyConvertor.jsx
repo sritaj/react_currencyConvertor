@@ -30,6 +30,10 @@ const CurrencyConvertor = () => {
     console.log(data);
   }, []);
 
+  useEffect(() => {
+    showConvertedCurrency();
+  }, [toAmount, fromAmount, toCurrencyDropdown, fromCurrencyDropdown]);
+
   const showConvertedCurrency = () => {
     const convertedCurrency =
       fromAmount *
@@ -70,7 +74,6 @@ const CurrencyConvertor = () => {
                 type="number"
                 id="from-amount"
                 className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded"
-                placeholder="0"
                 value={fromAmount}
                 onChange={(e) => setFromAmount(e.target.value)}
               />
@@ -93,7 +96,6 @@ const CurrencyConvertor = () => {
                 type="number"
                 id="to-amount"
                 className="ml-4 px-2 bg-gray-50 border-gray-300 outline outline-offset2 outline-amber-500/50 rounded"
-                placeholder="0"
                 value={toAmount}
                 readOnly={true}
               />
