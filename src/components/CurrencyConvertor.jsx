@@ -48,8 +48,8 @@ const CurrencyConvertor = () => {
           <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
             Currency Convertor
           </h1>
-          <div className="">
-            <div className="">
+          <div className="flex flex-col items-center">
+            <div>
               <select
                 id="from-currency"
                 className=" bg-gray-50 border-gray-300 outline outline-offset2 outline-cyan-500/50 rounded w-16"
