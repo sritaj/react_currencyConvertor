@@ -1,5 +1,8 @@
 import "./App.css";
+import CurrencyConvertor from "./components/CurrencyConvertor";
 
-function App() {}
+const App = () => {
+  return <CurrencyConvertor />;
+};
 
 export default App;
