@@ -1,4 +1,25 @@
-const Swap = ({ swapFields }) => {
+export const ResetButton = ({ resetValues }) => {
+  return (
+    <div className="mt-6 flex justify-center">
+      {/* <button
+              id="convert"
+              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
+              onClick={showConvertedCurrency}
+            >
+              Convert
+            </button> */}
+      <button
+        id="convert"
+        className="text-white bg-blue-600 hover:bg-blue-800 rounded-full px-5 py-1 ring-offset-1 ring-1"
+        onClick={resetValues}
+      >
+        Reset
+      </button>
+    </div>
+  );
+};
+
+export const Swap = ({ swapFields }) => {
   return (
     <div className="relative inline-flex items-center justify-center w-full">
       <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
@@ -24,5 +45,3 @@ const Swap = ({ swapFields }) => {
     </div>
   );
 };
-
-export default Swap;

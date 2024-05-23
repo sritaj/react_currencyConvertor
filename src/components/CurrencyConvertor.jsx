@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import SelectDropdown from "./SelectDropdown";
 import ExchangeMessage from "./ExchangeMessage";
-import Swap from "./Swap";
+import { ResetButton, Swap } from "./ActionButtons";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -100,22 +100,7 @@ const CurrencyConvertor = () => {
           toCurrencyDropdown={toCurrencyDropdown}
         />
 
-        <div className="mt-6 flex justify-center">
-          {/* <button
-              id="convert"
-              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
-              onClick={showConvertedCurrency}
-            >
-              Convert
-            </button> */}
-          <button
-            id="convert"
-            className="text-white bg-blue-600 hover:bg-blue-800 rounded-full px-5 py-1 ring-offset-1 ring-1"
-            onClick={resetValues}
-          >
-            Reset
-          </button>
-        </div>
+        <ResetButton resetValues={resetValues} />
       </div>
     </div>
   );
