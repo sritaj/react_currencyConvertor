@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SelectDropdown from "./SelectDropdown";
+import ExchangeMessage from "./ExchangeMessage";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -112,15 +113,12 @@ const CurrencyConvertor = () => {
           />
         </div>
 
-        <p className="mt-6 text-center text-nowrap">
-          <span className="font-extralight text-sm">
-            {fromAmount} {fromCurrencyDropdown} equals {""}
-          </span>
-          <br></br>
-          <span className="text-3xl">
-            {toAmount} {toCurrencyDropdown}
-          </span>
-        </p>
+        <ExchangeMessage
+          fromAmount={fromAmount}
+          fromCurrencyDropdown={fromCurrencyDropdown}
+          toAmount={toAmount}
+          toCurrencyDropdown={toCurrencyDropdown}
+        />
 
         <div className="mt-6 flex justify-center">
           {/* <button
