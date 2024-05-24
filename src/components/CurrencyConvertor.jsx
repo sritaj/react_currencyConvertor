@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import SelectDropdown from "./SelectDropdown";
+import ExchangeMessage from "./ExchangeMessage";
+import { ResetButton, Swap } from "./ActionButtons";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -9,8 +12,8 @@ const CurrencyConvertor = () => {
   const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
   const [toCurrencyDropdown, setToCurrencyDropdown] = useState("USD");
 
-  // Utilizing state to set the currencies and exchange rates from the API call
-  const [currencies, setCurrencies] = useState({});
+  // Utilizing state to set the currencyOptions and exchange rates from the API call
+  const [currencyOptions, setCurrencyOptions] = useState({});
 
   useEffect(() => {
     const data = axios
@@ -18,7 +21,7 @@ const CurrencyConvertor = () => {
         "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
       )
       .then((response) => {
-        setCurrencies(response.data.data);
+        setCurrencyOptions(response.data.data);
         //console.log(response.data.data);
 
         //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
@@ -37,7 +40,8 @@ const CurrencyConvertor = () => {
   const showConvertedCurrency = () => {
     const convertedCurrency =
       fromAmount *
-      (currencies[toCurrencyDropdown] / currencies[fromCurrencyDropdown]);
+      (currencyOptions[toCurrencyDropdown] /
+        currencyOptions[fromCurrencyDropdown]);
     setToAmount(convertedCurrency.toFixed(2));
   };
 
@@ -69,102 +73,34 @@ const CurrencyConvertor = () => {
           <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
             Currency Convertor
           </h1>
-          <div className="flex flex-col items-center">
-            <div>
-              <input
-                type="number"
-                id="from-amount"
-                className="ps-3 h-8 rounded-l-lg border-2 border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
-                value={fromAmount}
-                onChange={(e) => setFromAmount(e.target.value)}
-              />
-              <select
-                id="from-currency"
-                className="ps-3 rounded-r-lg h-8 border-2 border-l-0  border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
-                value={fromCurrencyDropdown}
-                onChange={(e) => setFromCurrencyDropdown(e.target.value)}
-              >
-                {Object.entries(currencies).map(([name, exchange]) => (
-                  <option key={name} value={name}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
 
-            <div className="relative inline-flex items-center justify-center w-full">
-              <hr className="w-full h-px my-8 bg-amber-600 border-0"></hr>
-              <div className="absolute px-4 -translate-x-1/2  left-1/2">
-                <button
-                  className="text-white bg-orange-500 hover:bg-orange-700 rounded-full px-2 py-1 ring-offset-1 ring-1 ring-orange-500 ring-offset-orange-400 align-middle"
-                  onClick={swapFields}
-                >
-                  <svg
-                    className="w-6 h-6 mr-0 fill-current stroke-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M8 7l4-4 4 4M12 3v18" />
+          <SelectDropdown
+            amountDefault={fromAmount}
+            onAmountChange={setFromAmount}
+            currencyDefault={fromCurrencyDropdown}
+            onCurrencyChange={setFromCurrencyDropdown}
+            currencyOptions={currencyOptions}
+          />
 
-                    <path d="M16 17l-4 4-4-4M12 21V3" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+          <Swap swapFields={swapFields} />
 
-            <div className="">
-              <input
-                type="number"
-                id="to-amount"
-                className="ps-3 h-8 rounded-l-lg border-2 border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
-                value={toAmount}
-                readOnly={true}
-              />
-              <select
-                id="to-currency"
-                className="ps-3 rounded-r-lg h-8 border-2 border-l-0  border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
-                value={toCurrencyDropdown}
-                onChange={(e) => setToCurrencyDropdown(e.target.value)}
-              >
-                {Object.entries(currencies).map(([name, exchange]) => (
-                  <option key={name} value={name}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <p className="mt-6 text-center text-nowrap">
-            <span className="font-extralight text-sm">
-              {fromAmount} {fromCurrencyDropdown} equals {""}
-            </span>
-            <br></br>
-            <span className="text-3xl">
-              {toAmount} {toCurrencyDropdown}
-            </span>
-          </p>
-
-          <div className="mt-6 flex justify-center">
-            {/* <button
-              id="convert"
-              className="text-white bg-blue-700 hover:bg-blue:800 rounded-full px-5 py-1"
-              onClick={showConvertedCurrency}
-            >
-              Convert
-            </button> */}
-            <button
-              id="convert"
-              className="text-white bg-blue-600 hover:bg-blue-800 rounded-full px-5 py-1 ring-offset-1 ring-1"
-              onClick={resetValues}
-            >
-              Reset
-            </button>
-          </div>
+          <SelectDropdown
+            amountDefault={toAmount}
+            onAmountChange={setToAmount}
+            currencyDefault={toCurrencyDropdown}
+            onCurrencyChange={setToCurrencyDropdown}
+            currencyOptions={currencyOptions}
+          />
         </div>
+
+        <ExchangeMessage
+          fromAmount={fromAmount}
+          fromCurrencyDropdown={fromCurrencyDropdown}
+          toAmount={toAmount}
+          toCurrencyDropdown={toCurrencyDropdown}
+        />
+
+        <ResetButton resetValues={resetValues} />
       </div>
     </div>
   );
