@@ -4,6 +4,8 @@ import SelectDropdown from "./SelectDropdown";
 import ExchangeMessage from "./ExchangeMessage";
 import { ResetButton, Swap } from "./ActionButtons";
 import backgroundImage from "../assets/background_wallpaper.jpg";
+import Lottie from "react-lottie";
+import animationData from ".././lotties/lotties_currency";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -60,23 +62,33 @@ const CurrencyConvertor = () => {
     setFromCurrencyDropdown(toCurrencyDropdown);
   };
 
+  const currencyAnimation = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <div
       className="w-full h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="max-w-md h-fit rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
-        <a>
+        <div>
+          <h1 className="text-center my-2  text-slate-700 font-serif font-bold text- text-2xl">
+            Currency Convertor
+          </h1>
+          {/* <a>
           <img
             className="rounded-lg"
             src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
           />
-        </a>
-        <div>
-          <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
-            Currency Convertor
-          </h1>
+        </a> */}
+          <Lottie options={currencyAnimation} height={300} width={300} />
 
           <SelectDropdown
             amountDefault={fromAmount}
