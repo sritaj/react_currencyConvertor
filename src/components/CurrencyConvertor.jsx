@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import SelectDropdown from "./SelectDropdown";
 import ExchangeMessage from "./ExchangeMessage";
 import { ResetButton, Swap } from "./ActionButtons";
 import backgroundImage from "../assets/background_wallpaper.jpg";
+import Lottie from "react-lottie";
+import animationData from ".././lotties/lotties_currency";
+import useCurrencyList from "../hooks/useCurrencyList";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -13,37 +15,43 @@ const CurrencyConvertor = () => {
   const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
   const [toCurrencyDropdown, setToCurrencyDropdown] = useState("USD");
 
-  // Utilizing state to set the currencyOptions and exchange rates from the API call
-  const [currencyOptions, setCurrencyOptions] = useState({});
+  const currencyOptions = useCurrencyList();
 
-  useEffect(() => {
-    const data = axios
-      .get(
-        "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
-      )
-      .then((response) => {
-        setCurrencyOptions(response.data.data);
-        // console.log(response.data.data);
+  // Tracking which amount field was last updated for currency conversion
+  const [lastChanged, setLastChanged] = useState("from");
 
-        //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
-        // console.log(`Test: ${Object.keys(response.data.data)[15]}`); Prints INR
-      })
-      .catch((error) => {
-        console.error("Error fetching details from the API", error);
-      });
-    console.log(data);
-  }, []);
+  const setFromAmountStatus = () => {
+    setLastChanged("from");
+  };
+
+  const setToAmountStatus = () => {
+    setLastChanged("to");
+  };
 
   useEffect(() => {
     showConvertedCurrency();
   }, [toAmount, fromAmount, toCurrencyDropdown, fromCurrencyDropdown]);
 
   const showConvertedCurrency = () => {
-    const convertedCurrency =
-      fromAmount *
-      (currencyOptions[toCurrencyDropdown] /
-        currencyOptions[fromCurrencyDropdown]);
-    setToAmount(convertedCurrency.toFixed(2));
+    if (
+      currencyOptions &&
+      currencyOptions[fromCurrencyDropdown] &&
+      currencyOptions[toCurrencyDropdown]
+    ) {
+      if (lastChanged === "from") {
+        const convertedCurrency =
+          fromAmount *
+          (currencyOptions[toCurrencyDropdown] /
+            currencyOptions[fromCurrencyDropdown]);
+        setToAmount(convertedCurrency.toFixed(2));
+      } else {
+        const convertedCurrency =
+          toAmount *
+          (currencyOptions[fromCurrencyDropdown] /
+            currencyOptions[toCurrencyDropdown]);
+        setFromAmount(convertedCurrency.toFixed(2));
+      }
+    }
   };
 
   const resetValues = () => {
@@ -60,23 +68,33 @@ const CurrencyConvertor = () => {
     setFromCurrencyDropdown(toCurrencyDropdown);
   };
 
+  const currencyAnimation = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <div
-      className="w-full h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
+      className="w-full min-h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="max-w-md h-fit rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
-        <a>
+      <div className="max-w-md w-full rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
+        <div>
+          <h1 className="text-center my-2  text-slate-700 font-serif font-bold text- text-2xl">
+            Currency Convertor
+          </h1>
+          {/* <a>
           <img
             className="rounded-lg"
             src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt=""
           />
-        </a>
-        <div>
-          <h1 className="text-center m-6 text-slate-700 font-serif font-bold text-l">
-            Currency Convertor
-          </h1>
+        </a> */}
+          <Lottie options={currencyAnimation} height={300} width={300} />
 
           <SelectDropdown
             amountDefault={fromAmount}
@@ -84,6 +102,7 @@ const CurrencyConvertor = () => {
             currencyDefault={fromCurrencyDropdown}
             onCurrencyChange={setFromCurrencyDropdown}
             currencyOptions={currencyOptions}
+            setChangeStatus={setFromAmountStatus}
           />
 
           <Swap swapFields={swapFields} />
@@ -94,6 +113,7 @@ const CurrencyConvertor = () => {
             currencyDefault={toCurrencyDropdown}
             onCurrencyChange={setToCurrencyDropdown}
             currencyOptions={currencyOptions}
+            setChangeStatus={setToAmountStatus}
           />
         </div>
 
