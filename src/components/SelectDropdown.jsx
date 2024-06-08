@@ -4,6 +4,7 @@ const SelectDropdown = ({
   currencyDefault,
   onCurrencyChange,
   currencyOptions,
+  setChangeStatus,
 }) => {
   return (
     <div className="flex flex-col items-center">
@@ -13,7 +14,8 @@ const SelectDropdown = ({
           id="from-amount"
           className="ps-3 h-8 rounded-l-lg border-2 border-gray-300 hover:border-indigo-500/75 focus:outline-none focus:border-indigo-500 bg-gray-100"
           value={amountDefault}
-          onChange={(e) => onAmountChange(e.target.value)}
+          onChange={(e) => onAmountChange(parseFloat(e.target.value))}
+          onClick={setChangeStatus}
         />
         <select
           id="from-currency"

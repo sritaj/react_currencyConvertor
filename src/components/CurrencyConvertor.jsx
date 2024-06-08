@@ -17,6 +17,17 @@ const CurrencyConvertor = () => {
 
   const currencyOptions = useCurrencyList();
 
+  // Tracking which amount field was last updated for currency conversion
+  const [lastChanged, setLastChanged] = useState("from");
+
+  const setFromAmountStatus = () => {
+    setLastChanged("from");
+  };
+
+  const setToAmountStatus = () => {
+    setLastChanged("to");
+  };
+
   useEffect(() => {
     showConvertedCurrency();
   }, [toAmount, fromAmount, toCurrencyDropdown, fromCurrencyDropdown]);
@@ -27,11 +38,19 @@ const CurrencyConvertor = () => {
       currencyOptions[fromCurrencyDropdown] &&
       currencyOptions[toCurrencyDropdown]
     ) {
-      const convertedCurrency =
-        fromAmount *
-        (currencyOptions[toCurrencyDropdown] /
-          currencyOptions[fromCurrencyDropdown]);
-      setToAmount(convertedCurrency.toFixed(2));
+      if (lastChanged === "from") {
+        const convertedCurrency =
+          fromAmount *
+          (currencyOptions[toCurrencyDropdown] /
+            currencyOptions[fromCurrencyDropdown]);
+        setToAmount(convertedCurrency.toFixed(2));
+      } else {
+        const convertedCurrency =
+          toAmount *
+          (currencyOptions[fromCurrencyDropdown] /
+            currencyOptions[toCurrencyDropdown]);
+        setFromAmount(convertedCurrency.toFixed(2));
+      }
     }
   };
 
@@ -83,15 +102,18 @@ const CurrencyConvertor = () => {
             currencyDefault={fromCurrencyDropdown}
             onCurrencyChange={setFromCurrencyDropdown}
             currencyOptions={currencyOptions}
+            setChangeStatus={setFromAmountStatus}
           />
 
           <Swap swapFields={swapFields} />
 
           <SelectDropdown
             amountDefault={toAmount}
+            onAmountChange={setToAmount}
             currencyDefault={toCurrencyDropdown}
             onCurrencyChange={setToCurrencyDropdown}
             currencyOptions={currencyOptions}
+            setChangeStatus={setToAmountStatus}
           />
         </div>
 
