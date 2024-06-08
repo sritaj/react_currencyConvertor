@@ -3,6 +3,7 @@ import axios from "axios";
 import SelectDropdown from "./SelectDropdown";
 import ExchangeMessage from "./ExchangeMessage";
 import { ResetButton, Swap } from "./ActionButtons";
+import backgroundImage from "../assets/background_wallpaper.jpg";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -22,7 +23,7 @@ const CurrencyConvertor = () => {
       )
       .then((response) => {
         setCurrencyOptions(response.data.data);
-        //console.log(response.data.data);
+        // console.log(response.data.data);
 
         //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
         // console.log(`Test: ${Object.keys(response.data.data)[15]}`); Prints INR
@@ -60,8 +61,11 @@ const CurrencyConvertor = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center py-14 bg-gradient-to-r from-sky-500 to-blue-200">
-      <div className=" max-w-md bg-white border border-gray-200 rounded-lg shadow p-12 py-12 bg-gradient-to-r from-slate-100 to-slate-200">
+    <div
+      className="w-full h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="max-w-md h-fit rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
         <a>
           <img
             className="rounded-lg"
