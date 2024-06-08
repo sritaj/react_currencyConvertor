@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import SelectDropdown from "./SelectDropdown";
 import ExchangeMessage from "./ExchangeMessage";
 import { ResetButton, Swap } from "./ActionButtons";
 import backgroundImage from "../assets/background_wallpaper.jpg";
 import Lottie from "react-lottie";
 import animationData from ".././lotties/lotties_currency";
+import useCurrencyList from "../hooks/useCurrencyList";
 
 const CurrencyConvertor = () => {
   const [fromAmount, setFromAmount] = useState(0);
@@ -15,26 +15,7 @@ const CurrencyConvertor = () => {
   const [fromCurrencyDropdown, setFromCurrencyDropdown] = useState("INR");
   const [toCurrencyDropdown, setToCurrencyDropdown] = useState("USD");
 
-  // Utilizing state to set the currencyOptions and exchange rates from the API call
-  const [currencyOptions, setCurrencyOptions] = useState({});
-
-  useEffect(() => {
-    const data = axios
-      .get(
-        "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_k5GVMJvCHChpVZBGFKiHcDqvRzAJodOutZc6WQie"
-      )
-      .then((response) => {
-        setCurrencyOptions(response.data.data);
-        // console.log(response.data.data);
-
-        //setFromCurrencyDropdown(Object.keys(response.data.data)(15));
-        // console.log(`Test: ${Object.keys(response.data.data)[15]}`); Prints INR
-      })
-      .catch((error) => {
-        console.error("Error fetching details from the API", error);
-      });
-    console.log(data);
-  }, []);
+  const currencyOptions = useCurrencyList();
 
   useEffect(() => {
     showConvertedCurrency();
@@ -73,10 +54,10 @@ const CurrencyConvertor = () => {
 
   return (
     <div
-      className="w-full h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
+      className="w-full min-h-screen bg-gradient-to-r from-cyan-50 to-cyan-100 flex justify-center items-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="max-w-md h-fit rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
+      <div className="max-w-md w-full rounded-2xl border-2 border-white shadow p-12 bg-gradient-to-r from-blue-50 to-blue-100">
         <div>
           <h1 className="text-center my-2  text-slate-700 font-serif font-bold text- text-2xl">
             Currency Convertor
