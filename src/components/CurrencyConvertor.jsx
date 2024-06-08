@@ -22,11 +22,17 @@ const CurrencyConvertor = () => {
   }, [toAmount, fromAmount, toCurrencyDropdown, fromCurrencyDropdown]);
 
   const showConvertedCurrency = () => {
-    const convertedCurrency =
-      fromAmount *
-      (currencyOptions[toCurrencyDropdown] /
-        currencyOptions[fromCurrencyDropdown]);
-    setToAmount(convertedCurrency.toFixed(2));
+    if (
+      currencyOptions &&
+      currencyOptions[fromCurrencyDropdown] &&
+      currencyOptions[toCurrencyDropdown]
+    ) {
+      const convertedCurrency =
+        fromAmount *
+        (currencyOptions[toCurrencyDropdown] /
+          currencyOptions[fromCurrencyDropdown]);
+      setToAmount(convertedCurrency.toFixed(2));
+    }
   };
 
   const resetValues = () => {
@@ -83,7 +89,6 @@ const CurrencyConvertor = () => {
 
           <SelectDropdown
             amountDefault={toAmount}
-            onAmountChange={setToAmount}
             currencyDefault={toCurrencyDropdown}
             onCurrencyChange={setToCurrencyDropdown}
             currencyOptions={currencyOptions}
