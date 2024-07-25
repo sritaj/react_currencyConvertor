@@ -14,3 +14,15 @@ steps:
     npm install
     npm run build
   displayName: 'Install dependencies and build project'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist/**/*'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy build output to staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+  displayName: 'Publish build artifacts'
