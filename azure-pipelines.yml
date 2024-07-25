@@ -1,5 +1,5 @@
 trigger:
-- main
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -11,8 +11,16 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    sudo apt-get update
+    sudo apt-get install -y jq
+    IP_ADDRESS=$(curl -s http://checkip.amazonaws.com || hostname -I | awk '{print $1}')
+    echo "##vso[task.setvariable variable=IPAddress]$IP_ADDRESS"
+    echo "The IP address is $IP_ADDRESS"
+  displayName: 'Get IP Address'
+
+- script: |
     npm install
-    npm run build
+    npm run dev
   displayName: 'Install dependencies and build project'
 
 - task: CopyFiles@2
@@ -26,3 +34,5 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publish build artifacts'
+  condition: 
+
