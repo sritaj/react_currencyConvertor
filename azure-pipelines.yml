@@ -12,7 +12,7 @@ steps:
 
 - script: |
     npm install
-    npm run dev
+    npm run build
   displayName: 'Install dependencies and build project'
 
 - task: CopyFiles@2
